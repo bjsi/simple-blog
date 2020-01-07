@@ -6,7 +6,11 @@ from app.models import Post
 
 @app.route('/')
 def index():
-    return render_template('home.html')
+    posts = (db
+             .session
+             .query(Post)
+             .all())
+    return render_template('home.html', posts=posts)
 
 
 @app.route('/about')
@@ -16,10 +20,14 @@ def about():
 
 @app.route('/blog')
 def blog():
+
     posts = (db
              .session
-             .query(Post)
-             .all())
+             .query(Post))
+
+    page = request.args.get('page', 1, type=int)
+    per_page = min(request.args.get('per_page', 10, type=int), 100)
+    posts.paginate()
 
     return render_template('blog.html', posts=posts)
 

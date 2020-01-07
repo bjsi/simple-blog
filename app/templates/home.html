@@ -1,10 +1,5 @@
 {% extends "base.html" %}
 
-{% block page_title %}
-Home
-{% endblock page_title %}
-
-
 {% block page_content %}
 <h1>Welcome</h1>
 <p>A website about my learning experiments. Check out the <a href="/blog">blog</a> where
@@ -13,7 +8,7 @@ I write about stuff. Find out more about me on the <a href="/about">about</a> pa
 <ul>
     {% if posts %}
         {% for post in posts %}
-            <li>{{ post.created_at }} - {{ post.title }}</li>
+            <li>{{ post.created_at.strftime('%Y-%m-%d') }} - {{ post.title }}</li>
         {% endfor %}
     {% else %}
         <li>No posts :(</li>

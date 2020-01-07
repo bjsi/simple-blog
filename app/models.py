@@ -59,7 +59,7 @@ class Tag(db.Model):
 
     id = db.Column(db.Integer, primary_key=True)
     tag = db.Column(db.Text, nullable=False)
-    notes = db.relationship('Post',
+    posts = db.relationship('Post',
                             secondary=post_tags,
                             back_populates='tags')
 

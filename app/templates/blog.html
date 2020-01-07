@@ -1,5 +1,49 @@
 {% extends "base.html" %}
 
 {% block page_content %}
+{% if posts %}
+    {% for post in posts %}
+        <div class="container mb-2">
+            <div class="card">
+                <div class="card-body">
+                    <div class="container">
+                        <h2><a href="#">{{ post.title }}</a></h2>
+                        <p>
+                            <i class="fa fa-user"></i> Me  |  <i class="fa fa-calendar"></i> {{ post.created_at.strftime('%Y-%m-%d') }}
+                        <p>
+                    </div>
+                <div class="container">
+                    <hr>
+                    <h5 class="card-text">
+                        {{ post.content }}
+                    </h5>
+                    <hr>
+                </div>
+                <div class="container">
+                    <p>
+                        <i class="fa fa-pencil-square-o"></i> Modified: {{ post.created_at.strftime('%Y-%m-%d') }}  |
+                        <i class="fa fa-comment"></i> Comments  |
+                        <i class="fa fa-file-word-o"></i> Words: {{ post.content | wordcount }}
+                    </p>
+                </div>
+            </div>
+        </div>
+    {% endfor %}
+{% else %}
+    <div class="card">
+        <div class="card-body">
+            <h3 class="card-title">No posts :(</h3>
+            <h6 class="card-subtitle mb-2">Check back later, maybe...</h6>
+            <p></p>
+        </div>
+    </div>
+{% endif %}
+
+<div class="container">
+    <button class="btn btn-primary btn-sm disabled float-left"
+            id="prev-page-button">Previous</button>
+    <button class="btn btn-primary btn-sm disabled float-right"
+            id="next-page-button">Next</button>
+</div>
 
 {% endblock page_content %}
