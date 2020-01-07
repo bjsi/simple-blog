@@ -1,0 +1,29 @@
+{% extends "base.html" %}
+
+{% block page_header %}
+About
+{% endblock page_header %}
+
+{% block page_content %}
+<h1>About</h1>
+<p>A person who likes learning.</p>
+<div>
+    <h2>Interests</h2>
+    <ul>
+        <li><a href="https://en.wikipedia.org/wiki/Spaced_repetition">Spaced Repetition <i class="fa fa-wikipedia-w"></i></a></li>
+        <li><a href="https://en.wikipedia.org/wiki/Quantified_self">Quantified Self <i class="fa fa-wikipedia-w"></i></a></li>
+        <li><a href="https://www.supermemo.com/en/archives1990-2015/help/read">Incremental Reading</a></li>
+        <li><a href="https://supermemo.guru/wiki/SuperMemo_Guru">SuperMemo</a></li>
+    </ul>
+</div>
+<hr>
+<div>
+    <h2>Meta</h2>
+    <h4>License</h3>
+    <p>Everything written here is under the <a href="https://creativecommons.org/licenses/by-nc/3.0/">Creative Commons 3.0</a> license.</p>
+</div>
+<div>
+    <h4>This site</h3>
+    <p>Built with Flask. HTML components from Bootstrap. Icons from FontAwesome.</p>
+</div>
+{% endblock page_content %}
