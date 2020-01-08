@@ -20,7 +20,6 @@ def about():
 
 @app.route('/blog')
 def blog():
-    """ TODO: Add search """
 
     # Parse for pagination info
     page = request.args.get('page', 1, type=int)
@@ -41,6 +40,28 @@ def blog():
                            posts=posts.items,
                            next_url=next_url,
                            prev_url=prev_url)
+
+
+@app.route('/search')
+def search():
+
+    # Parse for pagination info
+    page = request.args.get('page', 1, type=int)
+    per_page = min(request.args.get('per_page', 1, type=int), 100)
+
+    # Parse for search info
+    term = request.args.get('term')
+    posts, total = Post.search(term, page, per_page)
+
+    if term:
+        next_url = url_for('search', term, page=page + 1) \
+                   if total > page * per_page else None
+        prev_url = url_for('search', term, page=page - 1) \
+                   if page > per_page else None
+        return render_template('blog.html', posts=posts,
+                               next_url=next_url, prev_url=prev_url)
+    else:
+        redirect(url_for('blog'))
 
 
 @app.route('/contact')
