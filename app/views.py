@@ -1,5 +1,5 @@
 from flask import current_app as app
-from flask import render_template
+from flask import render_template, request, url_for
 from app import db
 from app.models import Post
 
@@ -20,28 +20,29 @@ def about():
 
 @app.route('/blog')
 def blog():
+    """ TODO: Add search """
+
+    # Parse for pagination info
+    page = request.args.get('page', 1, type=int)
+    per_page = min(request.args.get('per_page', 1, type=int), 100)
 
     posts = (db
              .session
-             .query(Post))
+             .query(Post)
+             .paginate(page, per_page, False))
 
-    page = request.args.get('page', 1, type=int)
-    per_page = min(request.args.get('per_page', 10, type=int), 100)
-    posts.paginate()
+    prev_url = url_for('blog', page=posts.prev_num) \
+               if posts.has_prev else None
 
-    return render_template('blog.html', posts=posts)
+    next_url = url_for('blog', page=posts.next_num) \
+               if posts.has_next else None
+
+    return render_template('blog.html',
+                           posts=posts.items,
+                           next_url=next_url,
+                           prev_url=prev_url)
 
 
 @app.route('/contact')
 def contact():
     return render_template('contact.html')
-
-
-@app.route('/tags', methods=['POST'])
-def tags():
-    return render_template('search_results.html')
-
-
-@app.route('/search', methods=['POST'])
-def search():
-    return render_template('search_results.html')

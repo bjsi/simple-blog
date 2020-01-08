@@ -3,7 +3,7 @@
     <head>
         <meta charset="UTF-8" />
         <meta name="viewport" content="width=device-width" />
-        <title>Learning Blog</title>
+        <title>Experimental Learning</title>
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
         <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
@@ -13,7 +13,7 @@
     <body>
         <nav class="navbar navbar-expand-lg navbar-light bg-light">
             <div class="container">
-                <a class="navbar-brand" href="/">Learning Blog</a>
+                <a class="navbar-brand" href="/"><i class="fa fa-flask"></i> Experimental Learning</a>
                 <button class="navbar-toggler"
                         type="button"
                         data-toggle="collapse"
@@ -32,35 +32,35 @@
                     <li class="nav-item"></li>
                         <a class="nav-link" href="/contact"><i class="fa fa-envelope"></i> Contact Me</a>
                     </ul>
-                    <form class="form-inline my-2 my-lg-0">
-                    <input class="form-control mr-sm-2"
-                           type="search"
-                           placeholder="Search">
-                    <button class="btn btn-outline-dark my-2 my-sm-0"
-                            type="submit">
-                        <i class="fa fa-search"></i>
-                    </button>
+                    <form class="form-inline my-2 my-sm-0">
+                        <input class="form-control mr-sm-2"
+                               type="search"
+                               placeholder="Search">
+                        <button class="btn btn-outline-dark my-2 my-sm-0"
+                                type="submit">
+                            <i class="fa fa-search"></i>
+                        </button>
                     </form>
                 </div>
             </div>
         </nav>
-
-        <div class="container mb-3">
-            {% block page_header %}
-            {% endblock page_header %}
-        </div>
 
         <div class="container mb-2">
             {% block page_content %}
             {% endblock page_content %}
         </div>
 
-        <div class="container">
+        <div class="container mb-2">
+            {% block pagination %}
+            {% endblock pagination %}
+        </div>
+
+        <div class="container mb-2">
             <footer>
                 <hr>
-                <p>
-                    <small class="text-center">Learning Blog <i class="fa fa-copyright"></i> 2020</small>
-                </p>
+                <small>
+                    <p class="text-center">Experimental Learning <i class="fa fa-copyright"></i> 2020</small>
+                </small>
             </footer>
         </div>
     </body>
