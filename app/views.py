@@ -25,10 +25,7 @@ def blog():
     page = request.args.get('page', 1, type=int)
     per_page = min(request.args.get('per_page', 1, type=int), 100)
 
-    posts = (db
-             .session
-             .query(Post)
-             .paginate(page, per_page, False))
+    posts = Post.public().paginate(page, per_page, False)
 
     prev_url = url_for('blog', page=posts.prev_num) \
                if posts.has_prev else None
@@ -42,26 +39,17 @@ def blog():
                            prev_url=prev_url)
 
 
-@app.route('/search')
-def search():
-
-    # Parse for pagination info
-    page = request.args.get('page', 1, type=int)
-    per_page = min(request.args.get('per_page', 1, type=int), 100)
-
-    # Parse for search info
-    term = request.args.get('term')
-    posts, total = Post.search(term, page, per_page)
-
-    if term:
-        next_url = url_for('search', term, page=page + 1) \
-                   if total > page * per_page else None
-        prev_url = url_for('search', term, page=page - 1) \
-                   if page > per_page else None
-        return render_template('blog.html', posts=posts,
-                               next_url=next_url, prev_url=prev_url)
+@app.route('/<slug>')
+def detail(slug):
+    post = (db
+            .session
+            .query(Post)
+            .filter(Post.slug.is_(slug))
+            .one_or_none())
+    if post:
+        return render_template('post.html', post=post)
     else:
-        redirect(url_for('blog'))
+        return render_template('404.html')
 
 
 @app.route('/contact')

@@ -8,7 +8,7 @@
              style="width: 100%;">
             <div class="card-body">
                 <h2 >
-                    <a href="#"
+                    <a href="{{ url_for('detail', slug=post.slug) }}"
                        style="color:black;">{{ post.title }}</a>
                 </h2>
                 <small>
