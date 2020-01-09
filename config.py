@@ -10,4 +10,3 @@ class Config:
                               os.path.join(APP_ROOT, 'blog.db')
     SQLALCHEMY_TRACK_MODIFICATIONS = False
     SQLALCHEMY_ECHO = True
-    ELASTICSEARCH_URL = "http://localhost:9200"
