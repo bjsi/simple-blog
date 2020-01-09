@@ -23,7 +23,7 @@ def blog():
 
     # Parse for pagination info
     page = request.args.get('page', 1, type=int)
-    per_page = min(request.args.get('per_page', 1, type=int), 100)
+    per_page = min(request.args.get('per_page', 5, type=int), 100)
 
     posts = Post.public().paginate(page, per_page, False)
 
